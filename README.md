@@ -1,5 +1,12 @@
 # RenderDoc Rust CircleCI Dockerfile
 
+[![Build Status][s1]][cc] [![Docker Hub][s2]][dh]
+
+[s1]: https://circleci.com/gh/ebkalderon/renderdoc-rs-circleci-dockerfile.svg?style=shield
+[cc]: https://circleci.com/gh/ebkalderon/renderdoc-rs-circleci-dockerfile
+[s2]: https://img.shields.io/badge/docker%20hub-renderdoc--rs--circleci-blue.svg
+[dh]: https://hub.docker.com/r/ebkalderon/renderdoc-rs-circleci
+
 Base Docker images used to build and test [renderdoc-rs] in [CircleCI].
 
 [CircleCI]: https://circleci.com/
@@ -38,4 +45,4 @@ use `circleci/rust:1.34.2` as a base, for example, then a container named
 ## License
 
 `renderdoc-rs-circleci-dockerfile` is free and open source software distributed
-under the terms of the [MIT](LICENSE).
+under the terms of the [MIT License](LICENSE).
