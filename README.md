@@ -1,22 +1,29 @@
 # RenderDoc Rust CircleCI Dockerfile
 
-Base Docker image used to build and test [renderdoc-rs] in [CircleCI].
+Base Docker images used to build and test [renderdoc-rs] in [CircleCI].
 
 [CircleCI]: https://circleci.com/
 
-This image is based on [circleci/rust] with the [RenderDoc] package installed
+These images are based on [circleci/rust] with the [RenderDoc] package installed
 from the Debian `unstable` repository.
 
 [RenderDoc]: http://renderdoc.org/
+
+## Building locally
+
+1. Make any desired changes to the [scripts](scripts).
+2. Run `./scripts/generate.sh > Dockerfile` to generate the new Dockerfile.
+3. `docker build -t ebkalderon/renderdoc-rs-circleci:${rust_version} .`
 
 ## Deploying a new version
 
 1. Commit the desired changes.
 2. Merge the changes into `master`.
-3. New image will be automatically generated, tested, and pushed to Docker Hub.
+3. New image is automatically generated, tested, and pushed to [Docker Hub].
 4. Switch to the [renderdoc-rs] repository and update the `.circleci/config.yml`
    to point to the new tag, if necessary.
 
+[Docker Hub]: https://hub.docker.com/r/ebkalderon/renderdoc-rs-circleci
 [renderdoc-rs]: https://github.com/ebkalderon/renderdoc-rs
 
 ## Versioning
