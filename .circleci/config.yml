@@ -18,28 +18,23 @@ jobs:
 
     steps:
       - checkout
-
       - run:
           name: Generate Dockerfile
           command: |
             bash scripts/generate.sh > Dockerfile
-
       - run:
           name: Login into Docker
           command: |
             docker login -u "$DOCKER_USERNAME" -p "$(echo $DOCKER_PASSWORD | base64 -d)"
-
       - run:
           name: Build Docker image
           command: |
             docker build -t "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG" .
-
       - run:
           name: Push Docker image
           command: |
             docker push "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG"
             sleep 10
-
       - store_artifacts:
           path: Dockerfile
 
@@ -51,7 +46,6 @@ jobs:
 
     steps:
       - checkout
-
       - run:
           name: Run unit tests
           command: |
@@ -59,10 +53,8 @@ jobs:
             bats scripts/tests.bats | \
             perl scripts/tap-to-junit.sh > \
             test_results/bats/results.xml
-
       - store_test_results:
           path: test_results
-
       - store_artifacts:
           path: test_results
 
@@ -72,7 +64,6 @@ workflows:
     jobs:
       - build:
           context: org-global
-
       - test_image:
           context: org-global
           requires:
