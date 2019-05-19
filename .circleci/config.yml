@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG .
+            docker build -t "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG" .
 
       - run:
           name: Push Docker image
