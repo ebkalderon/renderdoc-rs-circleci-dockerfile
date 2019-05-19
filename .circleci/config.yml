@@ -18,17 +18,17 @@ jobs:
       - run:
           name: Login into Docker
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
       - run:
           name: Build Docker image
           command: |
             export IMAGE_TAG="$(./print-tag.sh)"
-            docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG .
+            docker build -t "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG" .
 
       - run:
           name: Push Docker image
           command: |
             export IMAGE_TAG="$(./print-tag.sh)"
-            docker push $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG
+            docker push "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG"
             sleep 10
