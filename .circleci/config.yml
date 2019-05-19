@@ -5,15 +5,24 @@
 # * DOCKER_PASSWORD
 #
 
+image_config: &image_config
+  IMAGE_NAME: renderdoc-rs-circleci
+  IMAGE_VERSION: 1.34.2
+
 version: 2
 jobs:
   build:
     machine: true
     environment:
-      IMAGE_NAME: renderdoc-rs-circleci
+      <<: *image_config
 
     steps:
       - checkout
+
+      - run:
+          name: Generate Dockerfile
+          command: |
+            bash scripts/generate.sh > Dockerfile
 
       - run:
           name: Login into Docker
@@ -23,12 +32,36 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            export IMAGE_TAG="$(./print-tag.sh)"
             docker build -t "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG" .
 
       - run:
           name: Push Docker image
           command: |
-            export IMAGE_TAG="$(./print-tag.sh)"
             docker push "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG"
             sleep 10
+
+      - store_artifacts:
+          path: Dockerfile
+
+  test_image:
+    docker:
+      - image: $DOCKER_USERNAME/renderdoc-rs-circleci
+        environment:
+          <<: *image_config
+
+    steps:
+      - checkout
+
+      - run:
+          name: Run unit tests
+          command: |
+            mkdir -p test_results/bats
+            bats scripts/tests.bats | \
+            perl scripts/tap-to-junit.sh > \
+            test_results/bats/results.xml
+
+      - store_test_results:
+          path: test_results
+
+      - store_artifacts:
+          path: test_results

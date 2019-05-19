@@ -11,9 +11,9 @@ from the Debian `unstable` repository.
 
 ## Deploying a new version
 
-1. Update the `Dockerfile`.
+1. Commit the desired changes.
 2. Merge the changes into `master`.
-3. New image will be automatically pushed to Docker Hub.
+3. New image will be automatically generated, tested, and pushed to Docker Hub.
 4. Switch to the [renderdoc-rs] repository and update the `.circleci/config.yml`
    to point to the new tag, if necessary.
 
@@ -22,8 +22,8 @@ from the Debian `unstable` repository.
 ## Versioning
 
 The tag names used for this image are taken from the underlying [circleci/rust]
-image that this image is based on. For example, if the `Dockerfile` is updated
-to use `circleci/rust:1.34.2` as a base, for example, then a container named
+image that this image is based on. For example, if the container is updated to
+use `circleci/rust:1.34.2` as a base, for example, then a container named
 `ebkalderon/renderdoc-rs-circleci:1.34.2` will be deployed.
 
 [circleci/rust]: https://hub.docker.com/r/circleci/rust/
