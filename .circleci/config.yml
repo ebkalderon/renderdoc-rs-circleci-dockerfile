@@ -40,7 +40,7 @@ jobs:
 
   test_image:
     docker:
-      - image: $DOCKER_USERNAME/renderdoc-rs-circleci:$IMAGE_TAG
+      - image: $DOCKER_USERNAME/renderdoc-rs-circleci:1.33.0
         environment:
           <<: *image_config
 
