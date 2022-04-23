@@ -7,12 +7,13 @@
 
 image_config: &image_config
   IMAGE_NAME: renderdoc-rs-circleci
-  IMAGE_TAG: 1.48.0
+  IMAGE_TAG: 1.51.0
 
 version: 2
 jobs:
   build:
-    machine: true
+    machine:
+      image: ubuntu-2004:202201-02
     environment:
       <<: *image_config
 
@@ -40,7 +41,7 @@ jobs:
 
   test_image:
     docker:
-      - image: $DOCKER_USERNAME/renderdoc-rs-circleci:1.48.0
+      - image: $DOCKER_USERNAME/renderdoc-rs-circleci:1.51.0
         environment:
           <<: *image_config
 
