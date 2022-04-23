@@ -6,7 +6,7 @@ cat <<EOF
 # RenderDoc installed from the \`unstable\` Debian repository.
 #
 
-FROM circleci/rust:${IMAGE_TAG:-latest}
+FROM cimg/rust:${IMAGE_TAG:-latest}
 
 # Install 'renderdoc' on top of base image
 RUN \\
