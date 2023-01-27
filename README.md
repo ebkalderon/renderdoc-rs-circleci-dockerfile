@@ -1,3 +1,5 @@
+# _This repository has been archived since `renderdoc-rs` switched to GitHub Actions (ebkalderon/renderdoc-rs#135)._
+
 # RenderDoc Rust CircleCI Dockerfile
 
 [![Build Status][s1]][cc] [![Docker Hub][s2]][dh]
